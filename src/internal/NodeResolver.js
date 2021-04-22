@@ -7,8 +7,12 @@ type Props = {
   innerRef: ElementRef<*>,
 };
 
+type RefObject = {
+  current: any,
+};
+
 export default class NodeResolver extends Component<Props> {
-  wrapper = createRef();
+  wrapper: RefObject = createRef();
 
   componentDidMount() {
     this.props.innerRef(this.wrapper.current);
