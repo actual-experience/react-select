@@ -1,7 +1,6 @@
 // @flow
 
-import { Component, type Element, type ElementRef } from 'react';
-import { findDOMNode } from 'react-dom';
+import { Component, type Element, type ElementRef, createRef } from 'react';
 
 type Props = {
   children: Element<*>,
@@ -9,8 +8,10 @@ type Props = {
 };
 
 export default class NodeResolver extends Component<Props> {
+  wrapper = createRef();
+
   componentDidMount() {
-    this.props.innerRef(findDOMNode(this));
+    this.props.innerRef(this.wrapper.current);
   }
   componentWillUnmount() {
     this.props.innerRef(null);
@@ -19,3 +20,4 @@ export default class NodeResolver extends Component<Props> {
     return this.props.children;
   }
 }
+
